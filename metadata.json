@@ -1,0 +1,6 @@
+{
+  "name": "VeloRent",
+  "description": "A premium bicycle rental platform featuring a diverse catalog of road, mountain, and electric bikes with seamless booking and real-time availability.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": []
+}

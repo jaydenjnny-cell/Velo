@@ -1,0 +1,74 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Bike": {
+      "title": "Bike",
+      "description": "Bicycle available for rent",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["road", "mountain", "electric", "hybrid"] },
+        "pricePerHour": { "type": "number" },
+        "description": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "specs": {
+          "type": "object",
+          "properties": {
+            "weight": { "type": "string" },
+            "frame": { "type": "string" },
+            "battery": { "type": "string" },
+            "gears": { "type": "string" }
+          }
+        },
+        "rating": { "type": "number" },
+        "reviewsCount": { "type": "number" },
+        "available": { "type": "boolean" }
+      },
+      "required": ["name", "type", "pricePerHour", "available"]
+    },
+    "Rental": {
+      "title": "Rental",
+      "description": "Bike rental transaction",
+      "type": "object",
+      "properties": {
+        "bikeId": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "bikeName": { "type": "string" },
+        "startTime": { "type": "string", "format": "date-time" },
+        "endTime": { "type": "string", "format": "date-time" },
+        "totalPrice": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "completed", "cancelled"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["bikeId", "userId", "startTime", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Public and private user profiles"
+    },
+    "/bikes/{bikeId}": {
+      "schema": "Bike",
+      "description": "Catalog of bicycles"
+    },
+    "/rentals/{rentalId}": {
+      "schema": "Rental",
+      "description": "Rental records"
+    }
+  }
+}
